@@ -26,7 +26,7 @@ public :
 
 	void Find(string ChildName,Node* &CurrentNode)
 	{
-		bool found=true;
+		
 		
 		if(CurrentNode->GetName()==ChildName)
 		{
@@ -35,6 +35,9 @@ public :
 			cout<<"type: "<<CurrentNode->type<<endl;
 			cout<<"owner: "<<CurrentNode->GetOwnerName()<<endl;
 			cout<<"date: "<<CurrentNode->GetDate()<<endl;
+			cout<<"r: "<<CurrentNode->IsReadable<<endl;
+			cout<<"w: "<<CurrentNode->IsWritable<<endl;
+			cout<<"e: "<<CurrentNode->IsExceutable<<endl;
 		}
 		else
 		{
@@ -95,7 +98,7 @@ public :
 		{
 			for(int x=0;x<CurrentNode->FoldersAndFiles.size();x++)
 			{
-				Find(ChildName,CurrentNode->FoldersAndFiles[x]);
+				Update(ChildName,Property,value,CurrentNode->FoldersAndFiles[x]);
 			}
 		}
 		
