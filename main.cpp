@@ -16,30 +16,43 @@ int main()
 	//cin>>D>>M>>Y;
 	
 	
-	cout<<"hello!"<<endl;
+	
 	
 	string user;
-	cout<<"user:";cin>>user;
-
+	cout<<"Enter Your Name:";cin>>user;
+	cout<<"hello "<<user<<" !"<<endl;
 	Tree FileSystem;
 	//initalize the tree with folder called first folder
 	FileSystem.IntializeTheTree("root","folder",FileSystem.root);
-	cout<<"Manual"<<endl;
+	cout<<"Manual [instructions examples]"<<endl;
 	cout<<"*********************"<<endl;
-	cout<<"Create: create folder folder1 to root"<<endl;
-
+	cout<<"#Create: create folder folderName in root"<<endl;
+	cout<<"_____"<<endl;
+	cout<<"#Update: update folderName r true"<<endl;
+	cout<<"#Update: update folderName w true"<<endl;
+	cout<<"#Update: update folderName e true"<<endl;
+	cout<<"#Update: update folderName owner ahmed"<<endl;
+	cout<<"#Update: update folderName name myfolder"<<endl;
+	cout<<"_____"<<endl;
+	cout<<"#select: select folderName"<<endl;
+	cout<<"_____"<<endl;
+	cout<<"#Depth first search: DFS"<<endl;
+	cout<<"#Bredth first search: BFS"<<endl;
+	cout<<"_____"<<endl;
 	cout<<"output: out"<<endl;
-	string cmd,type,child,to,parent;
+	cout<<"***********************"<<endl;
+	string cmd,first,second,third,parent;
 	while(1)
 	{
 		FILE *stream ;
-		
+	
 		cin>>cmd;
-		if(cmd=="out")
+		if(cmd=="end"){break;}
+		else if(cmd=="out")
 		{
 
 			
-		   if((stream = freopen("file.txt", "w", stdout)) == NULL)
+		   if((stream = freopen("output.xml", "w", stdout)) == NULL)
 			  exit(-1);
 
 		  
@@ -51,22 +64,45 @@ int main()
 			FileSystem.xml(FileSystem.root);
 			//freopen ("/dev/tty", "a", stdout);
 		}
+		else if(cmd=="DFS")
+		{
+			FileSystem.DFS(FileSystem.root);
+		}
+		else if(cmd=="BFS")
+		{
+			FileSystem.BFS(FileSystem.root);
+		}
+		else if(cmd=="select")
+		{
+			stream = freopen("CON", "w", stdout);
+			cin>>first;
+			FileSystem.Find(first,FileSystem.root);
+		}
+		else if(cmd=="update")
+		{
+			cin>>first>>second>>third;
+			FileSystem.Update(first,second,third,FileSystem.root);
+		}
 		else
 		{
 			stream = freopen("CON", "w", stdout);
-			cin>>type>>child>>to>>parent;
+			cin>>first>>second>>third>>parent;
 			if(cmd=="create")
 			{
-				FileSystem.FindAndAdd(parent,child,type,FileSystem.root);
-				FileSystem.traverse(FileSystem.root);
+				FileSystem.FindAndAdd(parent,second,first,user,FileSystem.root);
+				cout<<"Done"<<endl;
 				//printing the number of folders,files in the tree
 				cout<<"Number of folders : "<<NumberOfFolders<<","<<"Number of files : "<<NumberOfFiles<<endl;
 			
 			
-				FileSystem.traverse(FileSystem.root);
+		
 			}
-			else if(cmd=="update"){}
-			else if(cmd=="delete"){}
+			
+			
+			else if(cmd=="delete")
+			{
+				//Mohsen Do Your Stuff Here.....Asshole.
+			}
 		}
 		
 		
@@ -87,6 +123,6 @@ int main()
 
 
 
-    system ("pause");
+    //system ("pause");
     return 0;
 }
