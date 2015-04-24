@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <ctime>
 using namespace std;
 
 
@@ -31,15 +32,32 @@ public:
 
 	Node(string fileorfolder)
 	{
+		time_t now = time(0);
+		tm *ltm = localtime(&now);
+		string currentDate="["+to_string((long long)(1 + ltm->tm_mon))+"/"+to_string((long long)ltm->tm_mday)+"/"+to_string((long long)(1900 + ltm->tm_year))+" "+to_string((long long)(1 + ltm->tm_hour))+ ":"+ to_string((long long)(1 + ltm->tm_min))+ ":"+to_string((long long)(1 + ltm->tm_sec)) +"]";
+
 		if(fileorfolder==NEWFILE)
 		{
-			this->name="new file "+to_string((long long)NumberOfFiles);NumberOfFiles++;this->owner=" ",date=to_string((long long)D)+"/"+
-			to_string((long long)M)+"/"+to_string((long long)Y),at=0;IsReadable=true;IsWritable=true;IsExceutable=false,IsFolder=false;
+			this->name="new file "+to_string((long long)NumberOfFiles);
+			NumberOfFiles++;
+			
+			this->owner=" ";
+			date=currentDate;
+			IsReadable=true;
+			IsWritable=true;
+			IsExceutable=false,
+			IsFolder=false;
 		}
 		else if(fileorfolder==NEWFOLDER)
 		{
-			this->name="new folder "+to_string((long long)NumberOfFolders);NumberOfFolders++;this->owner=" ",date=to_string((long long)D)+"/"+
-			to_string((long long)M)+"/"+to_string((long long)Y),at=0;IsReadable=true;IsWritable=false;IsExceutable=false,IsFolder=true;
+			this->name="new folder "+to_string((long long)NumberOfFolders);
+			NumberOfFolders++;
+			this->owner=" ";
+			date=currentDate;
+			IsReadable=true;
+			IsWritable=false;
+			IsExceutable=false;
+			IsFolder=true;
 		}
 		else
 		{
@@ -64,10 +82,10 @@ public:
 	{
 		return this->name;
 	}
-	void SetDate(int day,int month,int year)
-	{
-		this->date=to_string((long long)day)+"/"+to_string((long long)month)+"/"+to_string((long long)year);
-	}
+	//void SetDate(int day,int month,int year)
+	//{
+	//	this->date=to_string((long long)day)+"/"+to_string((long long)month)+"/"+to_string((long long)year);
+	//}
 	string GetDate()
 	{
 		return this->date;

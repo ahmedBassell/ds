@@ -69,8 +69,7 @@ public :
 			//if it's not what we looking for then we will recurse through the childs vector of the current node
 			else
 			{
-				for(int x=0;x<CurrentNode->FoldersAndFiles.size();x++)
-					FindAndAdd(ParentName,ChildName,FolderFile,CurrentNode->FoldersAndFiles[x]);
+				
 			}
 	}
 
