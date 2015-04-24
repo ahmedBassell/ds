@@ -18,14 +18,15 @@ private :
 	string name;
 	string owner;
 	string date;
-	string data;  
+	string data; 
+	
 
 public:
 	bool IsReadable;
 	bool IsWritable;
 	bool IsExceutable;
 	bool IsFolder;
-
+	string type;
 	
 
 	vector<Node*> FoldersAndFiles;
@@ -41,6 +42,7 @@ public:
 			this->name="new file "+to_string((long long)NumberOfFiles);
 			NumberOfFiles++;
 			
+			this->type=NEWFILE;
 			this->owner=" ";
 			date=currentDate;
 			IsReadable=true;
@@ -52,6 +54,8 @@ public:
 		{
 			this->name="new folder "+to_string((long long)NumberOfFolders);
 			NumberOfFolders++;
+
+			this->type=NEWFOLDER;
 			this->owner=" ";
 			date=currentDate;
 			IsReadable=true;

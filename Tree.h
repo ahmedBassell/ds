@@ -10,8 +10,9 @@ private:
 	 
 public :
 	Node* root;
+	int Depth;
 	
-	Tree(){root=NULL;AllTheData="";}
+	Tree(){root=NULL;AllTheData="";Depth=0;}
 
 	//if the tree is empty we call this function (in the beginnsing)
 	void IntializeTheTree(string FirstCreatedName,string FolderFile,Node* &Root)
@@ -42,7 +43,8 @@ public :
 					*/
 					Node * Created=new Node(FolderFile);
 					Created->Rename(ChildName);
-					CurrentNode->add(Created);				
+					CurrentNode->add(Created);
+					Depth++;
 				}
 			}
 
@@ -119,7 +121,48 @@ public :
 		}
 		
 	}
+	void xml(Node* curr,int depth=0)
+	{
+		
+		if(depth==0)
+		{
+			cout<<"<?xml version='1.0' encoding='UTF-8'?>"<<endl;
+			cout<<"<node>"<<endl;
+			cout<<"<name>"<<curr->GetName()<<"</name>"<<endl;
+			cout<<"<type>"<<curr->type<<"</type>"<<endl;
+			cout<<"<owner>"<<curr->GetOwnerName()<<"</owner>"<<endl;
+			cout<<"<date>"<<curr->GetDate()<<"</date>"<<endl;
+		}
+		if(curr->FoldersAndFiles.size()!=0)
+		{
+			depth++;
+			string intend="";
+			for(int i=0;i<depth;i++)
+				intend+="    ";
 
+			cout<<intend<<"<children>"<<endl;
+			for(int x=0;x<curr->FoldersAndFiles.size();x++)
+			{
+				cout<<"<node>"<<endl;
+				cout<<intend<<"<name>"<<curr->FoldersAndFiles[x]->GetName()<<"</name>"<<endl;
+				cout<<intend<<"<type>"<<curr->FoldersAndFiles[x]->type<<"</type>"<<endl;
+				cout<<intend<<"<owner>"<<curr->FoldersAndFiles[x]->GetOwnerName()<<"</owner>"<<endl;
+				cout<<intend<<"<date>"<<curr->FoldersAndFiles[x]->GetDate()<<"</date>"<<endl;
+
+				
+				xml(curr->FoldersAndFiles[x],depth);
+				cout<<"</node>"<<endl;
+			}
+			cout<<intend<<"</children>"<<endl;
+			depth--;
+			
+		}
+		if(depth==0)
+		{
+			cout<<"</node>"<<endl;
+		}
+		
+	}
 	/*
 	in this function we need to search for the folder with the given name and Getting all its contnets and showing them(name,data,etc..)(Getters)
 	else you will print not found
