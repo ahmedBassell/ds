@@ -83,6 +83,15 @@ int main()
 			cin>>first>>second>>third;
 			FileSystem.Update(first,second,third,FileSystem.root);
 		}
+		else if(cmd=="delete")
+		{
+				cin>>first;
+				if(first==FileSystem.root->GetName() && FileSystem.root->FoldersAndFiles.size()==0 )
+					cout<<"you can't delete the root folder"<<endl;
+				else
+					FileSystem.Delete(first,FileSystem.root,FileSystem.root->FoldersAndFiles,0);
+	
+		}
 		else
 		{
 			stream = freopen("CON", "w", stdout);
@@ -99,10 +108,7 @@ int main()
 			}
 			
 			
-			else if(cmd=="delete")
-			{
-				//Mohsen Do Your Stuff Here.....Asshole.
-			}
+			
 		}
 		
 		

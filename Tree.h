@@ -103,10 +103,33 @@ public :
 		}
 		
 	}
-	void Delete(string ChildName,Node* &CurrentNode)
+	void Delete(string Name,Node* &CurrentNode,vector<Node*>& level,int index)
 	{
+		if(CurrentNode->GetName()==Name)
+		{
+			RefreshTheFilesAndFolderNumber(CurrentNode);
+			level.erase(level.begin()+index);
+			cout<<"deleted"<<endl;
+		}
+		else
+		{
+			for(int x=0;x<CurrentNode->FoldersAndFiles.size();x++)
+				Delete(Name,CurrentNode->FoldersAndFiles[x],CurrentNode->FoldersAndFiles,x);
+		}
+
+			
+	}
+
+	void RefreshTheFilesAndFolderNumber(Node* &CurrentNode)
+	{
+		if(CurrentNode->IsFolder)
+			NumberOfFolders--;
+		else
+			NumberOfFiles--;
+
+		for(int x=0;x<CurrentNode->FoldersAndFiles.size();x++)
+			RefreshTheFilesAndFolderNumber(CurrentNode->FoldersAndFiles[x]);
 		
-			//Mohsen Do Your Stuff Here.....Asshole.
 	}
 
 
